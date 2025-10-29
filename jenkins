@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('GitHub Clone') {
             steps {
-                git branch: 'project-02', credentialsId: 'b8649f09-a724-435e-bdbb-31f5068cbb81', url: 'https://github.com/Jashu1410/project-02.git''
+                git branch: 'project-02', url: 'https://github.com/Jashu1410/project-02.git''
             }
         }
         stage('Build Maven') {
@@ -18,8 +18,8 @@ pipeline {
             steps {
                 deploy adapters: [tomcat9(alternativeDeploymentContext: '',  credentialsId: 'c0264521-4691-4a27-b899-e1e134782a59',
                 path: '',
-                url: 'http://13.201.117.230:8080/')],
-                contextPath: 'project02',
+                url: 'http://3.110.171.139:8080/')],
+                contextPath: 'projec-02',
                 war: '**/*.war'
             }
         }
@@ -32,7 +32,7 @@ pipeline {
     }
     post {
         success {
-            emailext to: "cheym2266@gmail.com",
+            emailext to: "jaswanthkumar14102002@gmail.com"
             recipientProviders: [developers()],
             subject: "jenkins Pipe :${currentBuild.currentResult}: ${env.JOB_NAME}",
             body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\n More Info can be found here: ${env.BUILD_URL}",
